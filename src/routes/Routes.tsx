@@ -1,6 +1,7 @@
 import App from "@/App";
 import NotFound from "@/components/NotFound/NotFound";
 import MainLayout from "@/layout/MainLayout";
+import Dashboard from "@/pages/Dashboard/Dashboard";
 import Login from "@/pages/login/Login";
 import Register from "@/pages/Register/Register";
 import { createBrowserRouter } from "react-router-dom";
@@ -25,6 +26,10 @@ export const routes = createBrowserRouter([
   {
     path: "/register",
     element: <Register />,
+  },
+  {
+    path: "/dashboard",
+    element: <Dashboard />,
   },
   {
     path: "*", // Wildcard route for unmatched paths (optional, as it's handled above)

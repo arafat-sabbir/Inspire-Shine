@@ -15,7 +15,7 @@ const UserProfile = ({ user, cart }: { user: TUser; cart?: number }) => {
   const handleLogOut = () => {
     dispatch(logOut());
   };
-console.log(user);
+  console.log(user);
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -24,7 +24,9 @@ console.log(user);
           className="rounded-full p-1 h-12 w-12 shadow-md hover:shadow-lg"
         >
           <img
-            src={"https://beforeigosolutions.com/wp-content/uploads/2021/12/dummy-profile-pic-300x300-1.png"}
+            src={
+              "https://beforeigosolutions.com/wp-content/uploads/2021/12/dummy-profile-pic-300x300-1.png"
+            }
             className="w-full h-full rounded-full object-cover cursor-pointer"
             alt={user?.name || "User Profile"}
           />
@@ -37,22 +39,26 @@ console.log(user);
         <h3 className="text-md font-semibold font-bai text-gray-500">
           {user?.email}
         </h3>
-        <Link
-          className="flex items-center gap-2 w-full justify-center py-2 px-4 text-sm text-white bg-primary rounded-md hover:bg-primary-dark transition duration-300"
-          to={"/cart"}
-        >
-          <ShoppingCart className="w-4 h-4" />
-          My Cart ({cart})
-        </Link>
-        <Link
-          className="flex items-center gap-2 w-full justify-center py-2 px-4 text-sm text-white bg-primary rounded-md hover:bg-primary-dark transition duration-300"
-          to={"/manage_products"}
-        >
-          <SquareChartGantt className="w-4 h-4" />
-          Product Management
-        </Link>
+        <Button className="w-full bg-primary hover:text-black text-white rounded-md py-2">
+          <Link
+            className="flex gap-2 items-center"
+            to={"/cart"}
+          >
+            <ShoppingCart className="w-4 h-4" />
+            My Cart 
+          </Link>
+        </Button>
+        <Button className="w-full bg-primary hover:text-black text-white rounded-md py-2">
+          <Link
+            className="flex gap-2 items-center"
+            to={"/dashboard"}
+          >
+            <SquareChartGantt className="w-4 h-4" />
+            Dashboard
+          </Link>
+        </Button>
         <Button
-          className="w-full bg-red-500 hover:bg-red-600 hover:text-white text-white rounded-md py-2"
+          className="w-full bg-primary hover:text-black text-white rounded-md py-2"
           onClick={handleLogOut}
         >
           Logout
