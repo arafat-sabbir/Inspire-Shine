@@ -22,7 +22,7 @@ const Banner = () => {
           {/* Image Section */}
           <div className="w-full lg:w-1/2  mb-6 lg:mb-0">
             <img
-              src="/assets/background/banner.jpg"
+              src="/images/background/banner.jpg"
               alt="Car Wash"
               className="rounded-lg shadow-lg w-full rounded-l-full rounded-r-2xl h-auto"
             />
