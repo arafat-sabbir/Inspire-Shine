@@ -19,6 +19,7 @@ const user = useAppSelector(selectCurrentUser);
   };
   console.log(user);
   const { setTheme, theme } = useTheme();
+
   return (
     <nav className=" border-b sticky top-0 text-black w-full bg-white dark:bg-black z-50  dark:text-white ">
       <Container>
@@ -28,7 +29,7 @@ const user = useAppSelector(selectCurrentUser);
               to={"/"}
               className="md:text-xl text-sm  font-bai font-semibold tracking-wide flex items-center gap-1"
             >
-              <img src="/assets/logo/logo.png" className="h-14 w-14" alt="" />{" "}
+              <img src={theme==="dark"?"/images/logo.png":"/images/inspire-shine.png"} className="h-16 w-16" alt="" />{" "}
               Inspire Shine
             </Link>
           </div>
