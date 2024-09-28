@@ -39,10 +39,10 @@ const user = useAppSelector(selectCurrentUser);
               Home
             </NavLink>
             <NavLink
-              to={"/about-us"}
+              to={"/services"}
               className="hover:text-primary  font-bai cursor-pointer transition-all duration-300"
             >
-              About Us
+              Services
             </NavLink>
             <NavLink
               to="products"

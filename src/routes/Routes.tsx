@@ -4,6 +4,8 @@ import MainLayout from "@/layout/MainLayout";
 import Dashboard from "@/pages/Dashboard/Dashboard";
 import Login from "@/pages/login/Login";
 import Register from "@/pages/Register/Register";
+import ServiceDetail from "@/pages/ServiceDetail/ServiceDetail";
+import Services from "@/pages/Services/Services";
 import { createBrowserRouter } from "react-router-dom";
 
 export const routes = createBrowserRouter([
@@ -16,6 +18,14 @@ export const routes = createBrowserRouter([
         path: "/",
         element: <App />,
       },
+      {
+        path: "services",
+        element: <Services />,
+      },
+      {
+        path:"/service/:id",
+        element: <ServiceDetail />
+      }
       // Additional nested routes can be added here
     ],
   },
