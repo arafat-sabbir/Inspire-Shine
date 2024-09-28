@@ -41,12 +41,14 @@ const LoginForm = ({ className }: { className?: string }) => {
   const onSubmit = async (values: z.infer<typeof LoginFormValidation>) => {
     setLoading(true);
     try {
-      const result = await axios.post("/user/login", values);
+      const result = await axios.post("/auth/login", values);
       toast.success(result?.data?.message);
       const user = decodeToken(result.data.data.accessToken) as TUser;
       dispatch(setUser({ user, token: result.data.data.accessToken }));
       navigate("/");
+      console.log(result?.data);
     } catch (error: any) {
+      console.log(error?.response);
       toast.error(error.response.data.message);
     } finally {
       setLoading(false);

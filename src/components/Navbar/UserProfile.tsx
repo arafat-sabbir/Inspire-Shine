@@ -4,19 +4,18 @@ import {
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
 import { Button } from "../ui/button";
-import generateImage from "@/utils/generateImage";
 import { TUser } from "@/types/user/user";
 import { logOut } from "@/redux/features/auth/authSlice";
 import { useAppDispatch } from "@/redux/features/hooks";
 import { Link } from "react-router-dom";
 import { ShoppingCart, SquareChartGantt } from "lucide-react";
 
-const UserProfile = ({ user, cart }: { user?: TUser; cart?: number }) => {
+const UserProfile = ({ user, cart }: { user: TUser; cart?: number }) => {
   const dispatch = useAppDispatch();
   const handleLogOut = () => {
     dispatch(logOut());
   };
-
+console.log(user);
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -25,7 +24,7 @@ const UserProfile = ({ user, cart }: { user?: TUser; cart?: number }) => {
           className="rounded-full p-1 h-12 w-12 shadow-md hover:shadow-lg"
         >
           <img
-            src={generateImage(user?.photo)}
+            src={"https://beforeigosolutions.com/wp-content/uploads/2021/12/dummy-profile-pic-300x300-1.png"}
             className="w-full h-full rounded-full object-cover cursor-pointer"
             alt={user?.name || "User Profile"}
           />

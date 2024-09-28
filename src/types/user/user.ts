@@ -1,9 +1,10 @@
 export type TUser = {
-  userId: string;
-  role: string;
   name: string;
-  email:string
-  photo: string;
+  email: string;
+  password: string;
+  phone: string;
+  role: "user" | "admin";
+  address: string;
   iat: number;
   exp: number;
 };

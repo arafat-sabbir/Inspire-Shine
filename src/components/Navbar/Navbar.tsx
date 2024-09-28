@@ -17,6 +17,7 @@ const user = useAppSelector(selectCurrentUser);
   const toggleNavbar = () => {
     setOpen(!open);
   };
+  console.log(user);
   const { setTheme, theme } = useTheme();
   return (
     <nav className=" border-b sticky top-0 text-black w-full bg-white dark:bg-black z-50  dark:text-white ">
@@ -69,7 +70,7 @@ const user = useAppSelector(selectCurrentUser);
                 </Button>
               </Link>
             ) : (
-              <UserProfile  />
+              <UserProfile user={user} />
             )}
           </div>
           <div className="lg:hidden block ">
