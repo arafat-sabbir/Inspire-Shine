@@ -14,7 +14,7 @@ const reviewSchema = z.object({
 });
 
 // Rating component
-const Rating = ({ rating, setRating }) => {
+const Rating = ({ rating, setRating }:{rating:number,setRating:React.Dispatch<React.SetStateAction<number>>}) => {
   return (
     <div className="flex space-x-1 mb-4">
       {[1, 2, 3, 4, 5].map((star) => (
@@ -38,9 +38,8 @@ const RateUs = () => {
     resolver: zodResolver(reviewSchema),
   });
 
-  const onSubmit = (data) => {
+  const onSubmit = (data:any) => {
     console.log(data);
-    // Handle form submission logic (e.g., send data to server)
   };
 
   const [rating, setRating] = React.useState(0);
@@ -85,9 +84,9 @@ const RateUs = () => {
                 {...register("feedback")}
                 placeholder="Write your feedback here..."
                 className={`w-full p-3 border border-gray-300 rounded-lg mb-4 resize-none transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 ${errors.feedback ? 'border-red-500' : ''}`}
-                rows="4"
+                rows={4}
               ></textarea>
-              {errors.feedback && <p className="text-red-500 text-sm mb-4">{errors.feedback.message}</p>}
+              {errors.feedback && <p className="text-red-500 text-sm mb-4">{errors?.feedback?.message as any}</p>}
               <button
                 type="submit"
                 className="w-full bg-blue-600 text-white font-bold py-3 rounded-lg hover:bg-blue-700 transition duration-300 shadow-lg transform hover:scale-105"

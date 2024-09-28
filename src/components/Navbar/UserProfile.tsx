@@ -10,7 +10,7 @@ import { useAppDispatch } from "@/redux/features/hooks";
 import { Link } from "react-router-dom";
 import { ShoppingCart, SquareChartGantt } from "lucide-react";
 
-const UserProfile = ({ user, cart }: { user: TUser; cart?: number }) => {
+const UserProfile = ({ user }: { user: TUser; cart?: number }) => {
   const dispatch = useAppDispatch();
   const handleLogOut = () => {
     dispatch(logOut());

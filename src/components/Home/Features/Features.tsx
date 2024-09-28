@@ -1,5 +1,4 @@
 import Container from '@/layout/Container/Container';
-import React from 'react';
 
 const featuresData = [
   {
