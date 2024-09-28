@@ -52,6 +52,7 @@ const user = useAppSelector(selectCurrentUser);
           </ul>
           <div className="flex md:gap-6 gap-2 items-center">
             <Button
+            className="rounded-full hover:border-gray-500 border-gray-500"
               variant="outline"
               size="icon"
               onClick={() => setTheme(theme === "light" ? "dark" : "light")}

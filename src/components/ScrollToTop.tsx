@@ -42,7 +42,7 @@ const ScrollToTop = () => {
       initial={{ scale: 0 }}
       animate={{
         scale: progress! > 0.15 ? 1 : 0,
-        borderColor: `hsla(0, 78%, 52%, ${progress})`,
+        borderColor: `hsla(223, 57%, 52%, ${progress})`,
       }}
       transition={{ duration: 0.3 }}
     >
