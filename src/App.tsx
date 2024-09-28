@@ -1,5 +1,6 @@
 import Banner from "./components/Home/Banner/Banner";
 import Features from "./components/Home/Features/Features";
+import RateUs from "./components/Home/Rating/RateUs";
 import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
@@ -7,6 +8,7 @@ function App() {
     <>
       <Banner />
       <Features />
+      <RateUs />
       <ScrollToTop />
     </>
   );

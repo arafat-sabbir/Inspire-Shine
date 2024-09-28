@@ -39,7 +39,7 @@ const Features = () => {
     <div className="py-12 bg-gray-100">
       <Container className="mx-auto px-4">
         <h2 className="text-3xl font-bold text-center mb-8">Featured Services</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center justify-center items-center">
           {featuresData.map((feature, index) => (
             <div key={index} className="bg-white shadow-md rounded-lg lg:w-[350px] overflow-hidden">
               <img src={feature.imageUrl} alt={feature.title} className="w-full h-48 object-cover" />
