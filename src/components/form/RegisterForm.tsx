@@ -22,12 +22,13 @@ export enum FormFieldType {
   PHONE_INPUT = "phone_input",
   SELECT = "select",
 }
+// Name, email, password, phone number, address.
+
 
 const RegisterForm = ({ className }: { className?: string }) => {
   const navigate = useNavigate();
   const axios = useAxiosPublic();
-  const [photo, setPhoto] = useState<File | null>(null); // State to store the selected photo
-  const [photoPreview, setPhotoPreview] = useState<string | null>(null); // State for photo preview
+
 
   const form = useForm<z.infer<typeof RegisterFormValidation>>({
     resolver: zodResolver(RegisterFormValidation),
@@ -35,29 +36,18 @@ const RegisterForm = ({ className }: { className?: string }) => {
       email: "",
       password: "",
       name: "",
+      phone: "",
+      address:""
     },
   });
 
-  const onDrop = (acceptedFiles: File[]) => {
-    if (acceptedFiles.length > 0) {
-      setPhoto(acceptedFiles[0]); // Set the first accepted file as the photo
-      setPhotoPreview(URL.createObjectURL(acceptedFiles[0])); // Create a preview URL
-    }
-  };
+
 
   const [loading, setLoading] = useState<boolean>(false);
   const onSubmit = async (values: z.infer<typeof RegisterFormValidation>) => {
     setLoading(true);
-    const formData = new FormData();
-    formData.append("name", values.name);
-    formData.append("email", values.email);
-    formData.append("password", values.password);
-    if (photo) {
-      formData.append("image", photo); // Append the photo to FormData
-    }
-
     try {
-      const response = await axios.post("/user/register", formData);
+      const response = await axios.post("/auth/signup", values);
       toast.success("Register Successful");
       console.log(response);
       navigate("/login");
@@ -69,10 +59,24 @@ const RegisterForm = ({ className }: { className?: string }) => {
     }
   };
 
-  const { getRootProps, getInputProps } = useDropzone({
-    onDrop,
-    maxFiles: 1, // Limit to a single file
-  });
+
+
+
+  //Drop Zone For Photo Upload For Future Work
+
+  
+  // const [photo, setPhoto] = useState<File | null>(null); // State to store the selected photo
+  // const [photoPreview, setPhotoPreview] = useState<string | null>(null); // State for photo preview
+    // const onDrop = (acceptedFiles: File[]) => {
+  //   if (acceptedFiles.length > 0) {
+  //     setPhoto(acceptedFiles[0]); // Set the first accepted file as the photo
+  //     setPhotoPreview(URL.createObjectURL(acceptedFiles[0])); // Create a preview URL
+  //   }
+  // };
+  // const { getRootProps, getInputProps } = useDropzone({
+  //   onDrop,
+  //   maxFiles: 1, // Limit to a single file
+  // });
 
   return (
     <Container className="flex justify-center items-center h-screen relative">
@@ -103,6 +107,22 @@ const RegisterForm = ({ className }: { className?: string }) => {
               iconAlt="email"
             />
             <CustomFormField
+              label="Phone"
+              control={form.control}
+              className="rounded-none"
+              fieldType={FormFieldType.PHONE_INPUT}
+              name="phone"
+              placeholder="Enter Your Phone"
+            />
+             <CustomFormField
+              label="Address"
+              control={form.control}
+              className="rounded-none"
+              fieldType={FormFieldType.TEXTAREA}
+              name="address"
+              placeholder="Enter Your Address"
+            />
+            <CustomFormField
               label="Password"
               control={form.control}
               className="rounded-none"
@@ -112,7 +132,7 @@ const RegisterForm = ({ className }: { className?: string }) => {
               iconAlt="password"
             />
             {/* Dropzone for image upload */}
-            <div>
+            {/* <div>
               <label htmlFor="photo" className="font-medium">
                 Photo
               </label>
@@ -134,7 +154,7 @@ const RegisterForm = ({ className }: { className?: string }) => {
                   Drag 'n' drop your photo here, or click to select one
                 </p>
               </div>
-            </div>
+            </div> */}
             <Button
               disabled={loading}
               className="mt-4 bg-primary mx-auto lg:mx-0 w-full"

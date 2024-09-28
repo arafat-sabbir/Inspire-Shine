@@ -29,7 +29,7 @@ const user = useAppSelector(selectCurrentUser);
               to={"/"}
               className="md:text-xl text-sm  font-bai font-semibold tracking-wide flex items-center gap-1"
             >
-              <img src={theme==="dark"?"/images/logo.png":"/images/inspire-shine.png"} className="h-16 w-16" alt="" />{" "}
+              <img src={theme==="dark"?"/images/logo.png":"/images/inspire-shine.png"} className="h-20 w-20" alt="" />{" "}
               Inspire Shine
             </Link>
           </div>
