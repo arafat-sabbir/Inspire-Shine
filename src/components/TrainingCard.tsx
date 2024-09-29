@@ -1,6 +1,5 @@
 const TrainingCard = ({ data }: { data: { title: string; image: string } }) => {
   const { title, image } = data;
-  console.log(image);
   return (
     <div
       style={{ backgroundImage: `url(${image})` }}

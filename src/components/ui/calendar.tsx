@@ -1,4 +1,3 @@
-import * as React from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { DayPicker, DayPickerSingleProps } from "react-day-picker"; // Import types from react-day-picker
 import { cn } from "@/lib/utils";
@@ -6,21 +5,18 @@ import { buttonVariants } from "./button";
 
 export type CalendarProps = DayPickerSingleProps & {
   selectedDate: Date | undefined; // Allow `undefined` for the selectedDate
-  onChange: (date: Date | undefined) => void; // onChange should handle `undefined` dates
 };
 
 function Calendar({
   className,
   classNames,
-  showOutsideDays = true,
+  showOutsideDays = false,
   selectedDate,
-  onChange,
   ...props
 }: CalendarProps) {
   return (
     <DayPicker
       selected={selectedDate}
-      onSelect={onChange} // Handle date selection
       showOutsideDays={showOutsideDays}
       className={cn("p-3", className)}
       classNames={{

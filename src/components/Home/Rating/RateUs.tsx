@@ -39,7 +39,6 @@ const RateUs = () => {
   });
 
   const onSubmit = (data:any) => {
-    console.log(data);
   };
 
   const [rating, setRating] = React.useState(0);

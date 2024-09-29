@@ -1,6 +1,7 @@
 import App from "@/App";
 import NotFound from "@/components/NotFound/NotFound";
 import MainLayout from "@/layout/MainLayout";
+import Booking from "@/pages/Booking/Booking";
 import Dashboard from "@/pages/Dashboard/Dashboard";
 import Login from "@/pages/login/Login";
 import Register from "@/pages/Register/Register";
@@ -25,6 +26,10 @@ export const routes = createBrowserRouter([
       {
         path:"/service/:id",
         element: <ServiceDetail />
+      },
+      {
+        path:"/book",
+        element: <Booking />
       }
       // Additional nested routes can be added here
     ],

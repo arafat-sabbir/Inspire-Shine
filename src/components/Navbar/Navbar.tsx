@@ -17,7 +17,6 @@ const user = useAppSelector(selectCurrentUser);
   const toggleNavbar = () => {
     setOpen(!open);
   };
-  console.log(user);
   const { setTheme, theme } = useTheme();
 
   return (

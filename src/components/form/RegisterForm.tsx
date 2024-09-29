@@ -49,7 +49,6 @@ const RegisterForm = ({ className }: { className?: string }) => {
     try {
       const response = await axios.post("/auth/signup", values);
       toast.success("Register Successful");
-      console.log(response);
       navigate("/login");
     } catch (error: any) {
       console.log(error);

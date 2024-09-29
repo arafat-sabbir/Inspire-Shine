@@ -14,8 +14,7 @@ const UserProfile = ({ user }: { user: TUser; cart?: number }) => {
   const dispatch = useAppDispatch();
   const handleLogOut = () => {
     dispatch(logOut());
-  };
-  console.log(user);
+  }
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>

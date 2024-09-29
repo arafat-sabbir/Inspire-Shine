@@ -46,9 +46,7 @@ const LoginForm = ({ className }: { className?: string }) => {
       const user = decodeToken(result.data.data.accessToken) as TUser;
       dispatch(setUser({ user, token: result.data.data.accessToken }));
       navigate("/");
-      console.log(result?.data);
     } catch (error: any) {
-      console.log(error?.response);
       toast.error(error.response.data.message);
     } finally {
       setLoading(false);
