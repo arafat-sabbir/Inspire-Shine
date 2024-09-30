@@ -58,7 +58,6 @@ const Dashboard = () => {
 
   const { theme } = useTheme();
   const user = useAppSelector(selectCurrentUser);
-  console.log(user);
 
   return (
     <div className="flex h-screen">
@@ -90,7 +89,7 @@ const Dashboard = () => {
         </Button> */}
         <nav className={`flex flex-col ${isOpen ? "mt-[50px]" : "mt-[80px]"}`}>
           {/* Services Section */}
-          <div className="flex flex-col">
+       {user?.role === "admin" && <div className="flex flex-col">
             <Button
               onClick={() => setIsServicesOpen(!isServicesOpen)}
               className={`flex items-center py-2 px-4 text-title-dark hover:bg-gray-700 ${
@@ -125,7 +124,43 @@ const Dashboard = () => {
                 </Link>
               </div>
             )}
-          </div>
+          </div>}
+          {user?.role === "user" && <div className="flex flex-col">
+            <Button
+              onClick={() => setIsServicesOpen(!isServicesOpen)}
+              className={`flex items-center py-2 px-4 text-title-dark hover:bg-gray-700 ${
+                isOpen ? "justify-between" : "justify-center"
+              }`}
+            >
+              {isOpen && "Manage Profile"}
+              {!isOpen && <Kanban className="rotate-[270deg]" />}
+              {isOpen ? (
+                !isServicesOpen ? (
+                  <ChevronDown className={`${isOpen && "mr-2"}`} />
+                ) : (
+                  <ChevronDown className={`${isOpen && "mr-2"} rotate-180`} />
+                )
+              ) : (
+                ""
+              )}
+            </Button>
+            {isServicesOpen && isOpen && (
+              <div className="flex flex-col ml-4">
+                <Link
+                  to="/services/create"
+                  className="flex items-center py-2 px-4 hover:bg-gray-700 text-title-dark hover:text-title"
+                >
+                  <Plus className="mr-2" /> Create Service
+                </Link>
+                <Link
+                  to="/services/manage"
+                  className="flex items-center py-2 px-4 hover:bg-gray-700 text-title-dark hover:text-title"
+                >
+                  <List className="mr-2" /> Manage Service
+                </Link>
+              </div>
+            )}
+          </div>}
         </nav>
       </motion.div>
 
