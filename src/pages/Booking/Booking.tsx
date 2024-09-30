@@ -1,7 +1,6 @@
 import Container from "@/layout/Container/Container";
 import { selectCurrentUser } from "@/redux/features/auth/authSlice";
 import { useAppSelector } from "@/redux/features/hooks";
-import React from "react";
 import { useLocation } from "react-router-dom";
 
 export type TService = {

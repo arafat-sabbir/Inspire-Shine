@@ -50,7 +50,7 @@ const UserProfile = ({ user }: { user: TUser; cart?: number }) => {
         <Button className="w-full bg-primary hover:text-black text-white rounded-md py-2">
           <Link
             className="flex gap-2 items-center"
-            to={"/dashboard"}
+            to={"/dashboard/services"}
           >
             <SquareChartGantt className="w-4 h-4" />
             Dashboard

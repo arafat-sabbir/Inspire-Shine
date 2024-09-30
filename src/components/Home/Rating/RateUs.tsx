@@ -38,7 +38,7 @@ const RateUs = () => {
     resolver: zodResolver(reviewSchema),
   });
 
-  const onSubmit = (data:any) => {
+  const onSubmit = () => {
   };
 
   const [rating, setRating] = React.useState(0);

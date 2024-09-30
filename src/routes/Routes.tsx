@@ -3,6 +3,7 @@ import NotFound from "@/components/NotFound/NotFound";
 import MainLayout from "@/layout/MainLayout";
 import Booking from "@/pages/Booking/Booking";
 import Dashboard from "@/pages/Dashboard/Dashboard";
+import ManageServices from "@/pages/Dashboard/Services/ManageServices";
 import Login from "@/pages/login/Login";
 import Register from "@/pages/Register/Register";
 import ServiceDetail from "@/pages/ServiceDetail/ServiceDetail";
@@ -45,6 +46,12 @@ export const routes = createBrowserRouter([
   {
     path: "/dashboard",
     element: <Dashboard />,
+    children: [
+      {
+        path:"services",
+        element:<ManageServices/>
+      }
+    ]
   },
   {
     path: "*", // Wildcard route for unmatched paths (optional, as it's handled above)

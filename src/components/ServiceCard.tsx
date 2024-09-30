@@ -1,6 +1,7 @@
 import { Button } from "./ui/button";
 import { Link } from "react-router-dom";
 import { TService } from "@/types/services";
+import moment from "moment";
 
 const ServiceCard = ({ item }: { item: TService }) => {
   const { _id, name, description, price, duration, isDeleted } = item;
@@ -13,8 +14,13 @@ const ServiceCard = ({ item }: { item: TService }) => {
             Unavailable
           </div>
         )}
-        <h3 className="text-gray-500 text-sm uppercase tracking-wide">
-          Duration: {duration} hours
+        <h3 className="text-gray-500 text-sm capitalize tracking-wide">
+        Duration: {moment.duration(duration, "minutes").hours() > 0 &&
+              `${moment.duration(duration, "minutes").hours()}h `}
+            {moment.duration(duration, "minutes").minutes() > 0 &&
+              `${moment
+                .duration(duration, "minutes")
+                .minutes()} minutes`}
         </h3>
         <h2 className="text-2xl font-bold text-gray-800">{name}</h2>
         <p className="text-gray-600 text-sm leading-relaxed line-clamp-3">

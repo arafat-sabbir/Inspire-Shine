@@ -12,7 +12,6 @@ import { toast } from "sonner";
 import { Link, useNavigate } from "react-router-dom";
 import BackToHome from "../BackToHome";
 import useAxiosPublic from "@/hooks/AxiosPublic";
-import { useDropzone } from "react-dropzone";
 import { useState } from "react"; // Import useState to manage the image file
 import { Loader } from "lucide-react";
 
@@ -47,7 +46,7 @@ const RegisterForm = ({ className }: { className?: string }) => {
   const onSubmit = async (values: z.infer<typeof RegisterFormValidation>) => {
     setLoading(true);
     try {
-      const response = await axios.post("/auth/signup", values);
+      await axios.post("/auth/signup", values);
       toast.success("Register Successful");
       navigate("/login");
     } catch (error: any) {
