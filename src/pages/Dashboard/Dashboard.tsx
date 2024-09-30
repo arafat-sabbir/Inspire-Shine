@@ -11,6 +11,8 @@ import {
 import { Button } from "@/components/ui/button";
 import { Link, Outlet } from "react-router-dom";
 import { useTheme } from "@/components/theme-provider";
+import { selectCurrentUser } from "@/redux/features/auth/authSlice";
+import { useAppSelector } from "@/redux/features/hooks";
 
 const sidebarVariants = {
   open: {
@@ -55,12 +57,14 @@ const Dashboard = () => {
   }, []);
 
   const { theme } = useTheme();
+  const user = useAppSelector(selectCurrentUser);
+  console.log(user);
 
   return (
     <div className="flex h-screen">
       {/* Sidebar */}
       <motion.div
-        className={`fixed top-0 left-0 h-full bg-gray-800 text-white flex flex-col z-50`}
+        className={`h-full w-[250px] fixed top-0 left-0  md:relative bg-gray-800 text-white flex flex-col z-50`}
         initial={false}
         animate={isOpen ? "open" : "closed"}
         variants={sidebarVariants}
@@ -78,12 +82,12 @@ const Dashboard = () => {
             />
           </Link>
         )}
-        <Button
+        {/* <Button
           onClick={() => setIsOpen(!isOpen)}
           className="text-white absolute top-4 -right-[19px] rounded-full p-0 px-1.5"
         >
           {isOpen ? <ChevronLeft /> : <ChevronRight />}
-        </Button>
+        </Button> */}
         <nav className={`flex flex-col ${isOpen ? "mt-[50px]" : "mt-[80px]"}`}>
           {/* Services Section */}
           <div className="flex flex-col">
