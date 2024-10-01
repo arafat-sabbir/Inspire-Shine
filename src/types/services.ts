@@ -3,7 +3,7 @@ export type TService = {
     name: string
     description: string
     price: number
-    slots:[TSlot[]]
+    slots:TSlot[]
     duration: number
     isDeleted: boolean
     createdAt: string
@@ -19,6 +19,5 @@ export type TService = {
     _id: string
     createdAt: string
     updatedAt: string
-    __v: number
   }
   

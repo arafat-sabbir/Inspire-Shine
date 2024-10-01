@@ -1,31 +1,10 @@
 import Container from "@/layout/Container/Container";
 import { selectCurrentUser } from "@/redux/features/auth/authSlice";
 import { useAppSelector } from "@/redux/features/hooks";
+import { TService, TSlot } from "@/types/services";
 import { useLocation } from "react-router-dom";
 
-export type TService = {
-  _id: string;
-  name: string;
-  description: string;
-  price: number;
-  slots: [TSlot[]];
-  duration: number;
-  isDeleted: boolean;
-  createdAt: string;
-  updatedAt: string;
-};
 
-export interface TSlot {
-  service: string;
-  date: string;
-  startTime: string;
-  endTime: string;
-  isBooked: string;
-  _id: string;
-  createdAt: string;
-  updatedAt: string;
-  __v: number;
-}
 
 const Booking = () => {
   const { state: data } = useLocation();

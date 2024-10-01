@@ -10,7 +10,7 @@ const useAxiosSecure = () => {
 
   // Create Axios instance
   const instance = axios.create({
-    baseURL: `${import.meta.env.VITE_SERVER_URL}`,
+    baseURL: `https://inspire-shine-server.vercel.app/api`,
     withCredentials: true,
   });
 

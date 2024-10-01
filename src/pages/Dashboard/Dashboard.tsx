@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import {
-  ChevronLeft,
-  ChevronRight,
   Plus,
   List,
   ChevronDown,
@@ -77,7 +75,7 @@ const Dashboard = () => {
                   : "/images/inspire-shine.png"
               }
               alt="Logo"
-              className="w-[100px] h-[100px]"
+              className="w-[100px]  h-[100px]"
             />
           </Link>
         )}
@@ -97,33 +95,7 @@ const Dashboard = () => {
               }`}
             >
               {isOpen && "Services"}
-              {!isOpen && <Kanban className="rotate-[270deg]" />}
-              {isOpen ? (
-                !isServicesOpen ? (
-                  <ChevronDown className={`${isOpen && "mr-2"}`} />
-                ) : (
-                  <ChevronDown className={`${isOpen && "mr-2"} rotate-180`} />
-                )
-              ) : (
-                ""
-              )}
             </Button>
-            {isServicesOpen && isOpen && (
-              <div className="flex flex-col ml-4">
-                <Link
-                  to="/services/create"
-                  className="flex items-center py-2 px-4 hover:bg-gray-700 text-title-dark hover:text-title"
-                >
-                  <Plus className="mr-2" /> Create Service
-                </Link>
-                <Link
-                  to="/services/manage"
-                  className="flex items-center py-2 px-4 hover:bg-gray-700 text-title-dark hover:text-title"
-                >
-                  <List className="mr-2" /> Manage Service
-                </Link>
-              </div>
-            )}
           </div>}
           {user?.role === "user" && <div className="flex flex-col">
             <Button
@@ -187,7 +159,7 @@ const Dashboard = () => {
         </div>
 
         {/* Main Content */}
-        <div className="flex-1 p-6 bg-gray-100 dark:bg-gray-900">
+        <div className="p-2">
           <Outlet />
         </div>
       </div>
