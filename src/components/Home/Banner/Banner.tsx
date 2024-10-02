@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import Container from "@/layout/Container/Container";
+import { Link } from "react-router-dom";
 
 const Banner = () => {
   return (
@@ -15,9 +16,11 @@ const Banner = () => {
               Experience the ultimate care and attention to detail. We bring
               your car back to life with our expert wash service!
             </p>
+            <Link to="/services">
             <Button className="bg-accent  text-gray-900 font-semibold py-5 px-8 rounded-full">
               Book a Wash Today
             </Button>
+            </Link>
           </div>
           {/* Image Section */}
           <div className="w-full lg:w-1/2  mb-6 lg:mb-0">

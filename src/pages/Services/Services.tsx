@@ -23,7 +23,7 @@ const Services = () => {
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [sort, setSort] = useState("asc");
   const [pageSize] = useState(10);
-  const categories = ["cardio", "strength", "yoga", "accessories", "recovery"];
+  const categories = ["Basic Wash", "Interior Detailing", "Exterior Shine", "Engine Cleaning", "Headlight Restoration","Full Service"];
   const [searchTerm, setSearchTerm] = useState("");
 
   // Ref to clear the input value

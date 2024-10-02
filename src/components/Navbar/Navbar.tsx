@@ -20,7 +20,7 @@ const user = useAppSelector(selectCurrentUser);
   const { setTheme, theme } = useTheme();
 
   return (
-    <nav className=" border-b sticky top-0 text-black w-full bg-white dark:bg-black z-50  dark:text-white ">
+    <nav className=" border-b sticky top-0 text-black w-full  bg-white dark:bg-black z-50  dark:text-white ">
       <Container>
         <div className="h-20 items-center px-5 lg:px-0 flex justify-between">
           <div>
@@ -43,12 +43,12 @@ const user = useAppSelector(selectCurrentUser);
             >
               Services
             </NavLink>
-            <NavLink
-              to="products"
+            {/* <NavLink
+              to="/products"
               className="hover:text-primary font-bai  cursor-pointer transition-all duration-300"
             >
-              Our Products
-            </NavLink>
+              Review Us
+            </NavLink> */}
           </ul>
           <div className="flex md:gap-6 gap-2 items-center">
             <Button
@@ -100,7 +100,7 @@ const user = useAppSelector(selectCurrentUser);
         >
           <div className="flex justify-between w-full p-4">
             <h1 className="px-2 text-md text-primary font-bold">
-              Athlete's Arsenal
+              Inspire Shine
             </h1>
             <svg
               onClick={toggleNavbar}
@@ -118,21 +118,15 @@ const user = useAppSelector(selectCurrentUser);
               />
             </svg>
           </div>
-          <ul className="w-full p-4">
+          <ul className="w-full p-4 flex flex-col gap-1">
           <NavLink to={"/"} className={"rounded-full font-bai"} >
               Home
             </NavLink>
             <NavLink
-              to={"/about-us"}
+              to={"/services"}
               className="hover:text-primary  font-bai cursor-pointer transition-all duration-300"
             >
-              About Us
-            </NavLink>
-            <NavLink
-              to="products"
-              className="hover:text-primary font-bai  cursor-pointer transition-all duration-300"
-            >
-              Our Products
+              Services
             </NavLink>
           </ul>
         </div>

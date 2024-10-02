@@ -45,17 +45,16 @@ const RateUs = () => {
   const user = useAppSelector(selectCurrentUser); // Replace with your actual authentication check
 
   const handleLoginClick = () => {
-    // Redirect to login page
     navigate('/login'); // Change to your login route
   };
 
   return (
-    <Container>
+
       <div className="relative"> {/* Make the parent container relative */}
         {/* Black overlay for users not logged in */}
         {!user && (
-          <div className="absolute inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50">
-            <div className="text-white text-lg p-4">
+          <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center z-20">
+            <div className="text-white text-lg p-4 flex flex-col">
               <p>Please log in to provide feedback.</p>
               <button
                 onClick={handleLoginClick}
@@ -67,7 +66,8 @@ const RateUs = () => {
           </div>
         )}
 
-        <div className={`flex flex-col lg:gap-16 gap-8 md:flex-row items-center justify-between py-12 px-4 ${user ? '' : 'pointer-events-none opacity-50'}`}>
+       <Container>
+       <div className={`flex flex-col lg:gap-16 gap-8 md:flex-row items-center justify-between py-12 px-4 ${user ? '' : 'pointer-events-none opacity-50'}`}>
           <div className="md:w-1/2 p-6 bg-gradient-to-br from-blue-100 to-blue-50 rounded-lg shadow-lg transition-shadow duration-300 hover:shadow-xl">
             <h2 className="text-3xl font-bold mb-4 text-blue-700">We Value Your Feedback!</h2>
             <p className="text-gray-600 mb-6">
@@ -75,7 +75,6 @@ const RateUs = () => {
             </p>
             <img src="/images/feedback.png" alt="Feedback" className="w-full rounded-lg max-h-[450px] object-cover bg-bottom" />
           </div>
-          {user && ( // Only render the form if the user is logged in
             <form onSubmit={handleSubmit(onSubmit)} className="md:w-1/2 p-6 bg-white rounded-lg shadow-md transition-shadow duration-300 hover:shadow-xl mt-6 md:mt-0">
               <h3 className="text-2xl font-semibold mb-4 text-gray-800">Rate Us</h3>
               <Rating rating={rating} setRating={setRating} />
@@ -93,10 +92,9 @@ const RateUs = () => {
                 Submit Feedback
               </button>
             </form>
-          )}
         </div>
+       </Container>
       </div>
-    </Container>
   );
 };
 

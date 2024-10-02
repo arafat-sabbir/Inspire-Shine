@@ -3,11 +3,11 @@ import { motion } from "framer-motion";
 import {
   Plus,
   List,
-  ChevronDown,
-  Kanban,
+  Sun,
+  Moon,
 } from "lucide-react"; // Import relevant icons
 import { Button } from "@/components/ui/button";
-import { Link, Outlet } from "react-router-dom";
+import { Link, NavLink, Outlet } from "react-router-dom";
 import { useTheme } from "@/components/theme-provider";
 import { selectCurrentUser } from "@/redux/features/auth/authSlice";
 import { useAppSelector } from "@/redux/features/hooks";
@@ -54,14 +54,14 @@ const Dashboard = () => {
     };
   }, []);
 
-  const { theme } = useTheme();
   const user = useAppSelector(selectCurrentUser);
+  const { setTheme, theme } = useTheme();
 
   return (
     <div className="flex h-screen">
       {/* Sidebar */}
       <motion.div
-        className={`h-full w-[250px] fixed top-0 left-0  md:relative bg-gray-800 text-white flex flex-col z-50`}
+        className={`h-full w-[250px] border-r-2 border-r-gray-200 fixed top-0 left-0  md:relative  text-white flex flex-col z-50`}
         initial={false}
         animate={isOpen ? "open" : "closed"}
         variants={sidebarVariants}
@@ -87,15 +87,25 @@ const Dashboard = () => {
         </Button> */}
         <nav className={`flex flex-col ${isOpen ? "mt-[50px]" : "mt-[80px]"}`}>
           {/* Services Section */}
-       {user?.role === "admin" && <div className="flex flex-col">
-            <Button
+            {user?.role === "admin" && <div className="flex flex-col">
+            <ul className="space-y-4">
+            <NavLink to={'/dashboard/services'}
               onClick={() => setIsServicesOpen(!isServicesOpen)}
-              className={`flex items-center py-2 px-4 text-title-dark hover:bg-gray-700 ${
+              className={`flex items-center py-2 px-4 text-title-dark bg-slate-700 hover:bg-gray-700 ${
                 isOpen ? "justify-between" : "justify-center"
               }`}
             >
-              {isOpen && "Services"}
-            </Button>
+              Manage Services
+            </NavLink>
+            <NavLink to={'/dashboard/slots'}
+              onClick={() => setIsServicesOpen(!isServicesOpen)}
+              className={`flex items-center py-2 px-4 text-title-dark bg-gray-700 hover:bg-gray-700 ${
+                isOpen ? "justify-between" : "justify-center"
+              }`}
+            >
+              Manage Slots
+            </NavLink>
+            </ul>
           </div>}
           {user?.role === "user" && <div className="flex flex-col">
             <Button
@@ -105,16 +115,6 @@ const Dashboard = () => {
               }`}
             >
               {isOpen && "Manage Profile"}
-              {!isOpen && <Kanban className="rotate-[270deg]" />}
-              {isOpen ? (
-                !isServicesOpen ? (
-                  <ChevronDown className={`${isOpen && "mr-2"}`} />
-                ) : (
-                  <ChevronDown className={`${isOpen && "mr-2"} rotate-180`} />
-                )
-              ) : (
-                ""
-              )}
             </Button>
             {isServicesOpen && isOpen && (
               <div className="flex flex-col ml-4">
@@ -147,17 +147,23 @@ const Dashboard = () => {
       )}
 
       {/* Navbar */}
-      <div className="flex flex-col flex-1">
-        <div className="flex justify-between items-center p-4 bg-gray-200 dark:bg-gray-800">
-          <h1 className="text-xl font-bold">Manage</h1>
+      <div className="flex flex-col flex-1 border-b-2 border-b-gray-200">
+        <div className="flex justify-between items-center p-4 bg-gray-200">
+          <h1 className="text-xl font-bold">Manage Services</h1>
           <Button
-            onClick={() => setIsOpen(!isOpen)}
-            className="bg-gray-800 text-white hover:bg-gray-700"
-          >
-            Toggle
-          </Button>
+            className="rounded-full hover:border-gray-500 border-gray-500"
+              variant="outline"
+              size="icon"
+              onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+            >
+              {theme === "light" ? (
+                <Sun className="h-[1.2rem] w-[1.2rem] rotate-90 scale-100 transition-all" />
+              ) : (
+                <Moon className="h-[1.2rem] w-[1.2rem] text-white scale-100 transition-all" />
+              )}
+              <span className="sr-only">Toggle theme</span>
+            </Button>
         </div>
-
         {/* Main Content */}
         <div className="p-2">
           <Outlet />
