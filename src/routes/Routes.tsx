@@ -4,6 +4,9 @@ import MainLayout from "@/layout/MainLayout";
 import Booking from "@/pages/Booking/Booking";
 import Dashboard from "@/pages/Dashboard/Dashboard";
 import ManageServices from "@/pages/Dashboard/Services/ManageServices";
+import PastBooking from "@/pages/Dashboard/User/PastBooking/PastBooking";
+import Profile from "@/pages/Dashboard/User/Profile/Profile";
+import UpcomingBooking from "@/pages/Dashboard/User/UpcomingBooking/UpcomingBooking";
 import Login from "@/pages/login/Login";
 import Register from "@/pages/Register/Register";
 import ServiceDetail from "@/pages/ServiceDetail/ServiceDetail";
@@ -25,13 +28,13 @@ export const routes = createBrowserRouter([
         element: <Services />,
       },
       {
-        path:"/service/:id",
-        element: <ServiceDetail />
+        path: "/service/:id",
+        element: <ServiceDetail />,
       },
       {
-        path:"/book",
-        element: <Booking />
-      }
+        path: "/book",
+        element: <Booking />,
+      },
       // Additional nested routes can be added here
     ],
   },
@@ -48,13 +51,25 @@ export const routes = createBrowserRouter([
     element: <Dashboard />,
     children: [
       {
-        path:"services",
-        element:<ManageServices/>
-      }
-    ]
+        path: "services",
+        element: <ManageServices />,
+      },
+      {
+        path: "services/pastBookings",
+        element: <PastBooking />,
+      },
+      {
+        path: "services/upComingBookings",
+        element: <UpcomingBooking />,
+      },
+      {
+        path: "profile",
+        element: <Profile />,
+      },
+    ],
   },
   {
     path: "*", // Wildcard route for unmatched paths (optional, as it's handled above)
     element: <NotFound />, // Render NotFound component if you want to handle it at a higher level
-  }
+  },
 ]);

@@ -1,11 +1,6 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import {
-  Plus,
-  List,
-  Sun,
-  Moon,
-} from "lucide-react"; // Import relevant icons
+import { Plus, List, Sun, Moon, ChevronDown, ChevronUp } from "lucide-react"; // Import relevant icons
 import { Button } from "@/components/ui/button";
 import { Link, NavLink, Outlet } from "react-router-dom";
 import { useTheme } from "@/components/theme-provider";
@@ -79,60 +74,64 @@ const Dashboard = () => {
             />
           </Link>
         )}
-        {/* <Button
-          onClick={() => setIsOpen(!isOpen)}
-          className="text-white absolute top-4 -right-[19px] rounded-full p-0 px-1.5"
-        >
-          {isOpen ? <ChevronLeft /> : <ChevronRight />}
-        </Button> */}
         <nav className={`flex flex-col ${isOpen ? "mt-[50px]" : "mt-[80px]"}`}>
           {/* Services Section */}
-            {user?.role === "admin" && <div className="flex flex-col">
-            <ul className="space-y-4">
-            <NavLink to={'/dashboard/services'}
-              onClick={() => setIsServicesOpen(!isServicesOpen)}
-              className={`flex items-center py-2 px-4 text-title-dark bg-slate-700 hover:bg-gray-700 ${
-                isOpen ? "justify-between" : "justify-center"
-              }`}
-            >
-              Manage Services
-            </NavLink>
-            <NavLink to={'/dashboard/slots'}
-              onClick={() => setIsServicesOpen(!isServicesOpen)}
-              className={`flex items-center py-2 px-4 text-title-dark bg-gray-700 hover:bg-gray-700 ${
-                isOpen ? "justify-between" : "justify-center"
-              }`}
-            >
-              Manage Slots
-            </NavLink>
-            </ul>
-          </div>}
-          {user?.role === "user" && <div className="flex flex-col">
-            <Button
-              onClick={() => setIsServicesOpen(!isServicesOpen)}
-              className={`flex items-center py-2 px-4 text-title-dark hover:bg-gray-700 ${
-                isOpen ? "justify-between" : "justify-center"
-              }`}
-            >
-              {isOpen && "Manage Profile"}
-            </Button>
-            {isServicesOpen && isOpen && (
-              <div className="flex flex-col ml-4">
-                <Link
-                  to="/services/create"
-                  className="flex items-center py-2 px-4 hover:bg-gray-700 text-title-dark hover:text-title"
+          {user?.role === "admin" && (
+            <div className="flex flex-col">
+              <ul className="space-y-4">
+                <NavLink
+                  to={"/dashboard/services"}
+                  onClick={() => setIsServicesOpen(!isServicesOpen)}
+                  className={`flex items-center py-2 px-4 text-title-dark bg-slate-700 hover:bg-gray-700 ${
+                    isOpen ? "justify-between" : "justify-center"
+                  }`}
                 >
-                  <Plus className="mr-2" /> Create Service
-                </Link>
-                <Link
-                  to="/services/manage"
-                  className="flex items-center py-2 px-4 hover:bg-gray-700 text-title-dark hover:text-title"
+                  Manage Services
+                </NavLink>
+                <NavLink
+                  to={"/dashboard/slots"}
+                  onClick={() => setIsServicesOpen(!isServicesOpen)}
+                  className={`flex items-center py-2 px-4 text-title-dark bg-gray-700 hover:bg-gray-700 ${
+                    isOpen ? "justify-between" : "justify-center"
+                  }`}
                 >
-                  <List className="mr-2" /> Manage Service
-                </Link>
+                  Manage Slots
+                </NavLink>
+              </ul>
+            </div>
+          )}
+          {user?.role === "user" && (
+            <>
+              <div className="flex flex-col">
+                <Button
+                  onClick={() => setIsServicesOpen(!isServicesOpen)}
+                  className={`flex items-center py-2 px-4 text-title-dark hover:bg-gray-700 bg-gray-300 ${
+                    isOpen ? "justify-between" : "justify-center"
+                  }`}
+                >
+                  {isOpen && "Manage Services"}
+                  {isServicesOpen ? <ChevronUp /> : <ChevronDown />}
+                </Button>
+                {isServicesOpen && isOpen && (
+                  <div className="flex flex-col ml-4">
+                    <NavLink
+                      to="/dashboard/services/pastBookings"
+                      className="flex items-center py-2 px-4 hover:bg-gray-700 text-title-dark hover:text-title"
+                    >
+                      <Plus className="mr-2" /> Past Bookings
+                    </NavLink>
+                    <NavLink
+                      to="/dashboard/services/upcomingBookings"
+                      className="flex items-center py-2 px-4 hover:bg-gray-700 text-title-dark hover:text-title"
+                    >
+                      <List className="mr-2" /> Upcoming Bookings
+                    </NavLink>
+                  </div>
+                )}
               </div>
-            )}
-          </div>}
+              <NavLink className={"flex items-center py-2 px-4 text-title-dark hover:bg-gray-700 bg-gray-300 my-4"} to="/dashboard/profile">Profile</NavLink>
+            </>
+          )}
         </nav>
       </motion.div>
 
@@ -152,17 +151,17 @@ const Dashboard = () => {
           <h1 className="text-xl font-bold">Manage Services</h1>
           <Button
             className="rounded-full hover:border-gray-500 border-gray-500"
-              variant="outline"
-              size="icon"
-              onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-            >
-              {theme === "light" ? (
-                <Sun className="h-[1.2rem] w-[1.2rem] rotate-90 scale-100 transition-all" />
-              ) : (
-                <Moon className="h-[1.2rem] w-[1.2rem] text-white scale-100 transition-all" />
-              )}
-              <span className="sr-only">Toggle theme</span>
-            </Button>
+            variant="outline"
+            size="icon"
+            onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+          >
+            {theme === "light" ? (
+              <Sun className="h-[1.2rem] w-[1.2rem] rotate-90 scale-100 transition-all" />
+            ) : (
+              <Moon className="h-[1.2rem] w-[1.2rem] text-white scale-100 transition-all" />
+            )}
+            <span className="sr-only">Toggle theme</span>
+          </Button>
         </div>
         {/* Main Content */}
         <div className="p-2">
