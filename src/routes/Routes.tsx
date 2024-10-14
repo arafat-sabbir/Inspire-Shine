@@ -3,7 +3,7 @@ import NotFound from "@/components/NotFound/NotFound";
 import MainLayout from "@/layout/MainLayout";
 import Booking from "@/pages/Booking/Booking";
 import Dashboard from "@/pages/Dashboard/Dashboard";
-import ManageServices from "@/pages/Dashboard/Services/ManageServices";
+import ManageServices from "@/pages/Dashboard/Admin/Services/ManageServices";
 import PastBooking from "@/pages/Dashboard/User/PastBooking/PastBooking";
 import Profile from "@/pages/Dashboard/User/Profile/Profile";
 import UpcomingBooking from "@/pages/Dashboard/User/UpcomingBooking/UpcomingBooking";
@@ -12,6 +12,7 @@ import Register from "@/pages/Register/Register";
 import ServiceDetail from "@/pages/ServiceDetail/ServiceDetail";
 import Services from "@/pages/Services/Services";
 import { createBrowserRouter } from "react-router-dom";
+import ManageSlots from "@/pages/Dashboard/Admin/Slots/ManageSlots";
 
 export const routes = createBrowserRouter([
   {
@@ -53,6 +54,10 @@ export const routes = createBrowserRouter([
       {
         path: "services",
         element: <ManageServices />,
+      },
+      {
+        path: "slots",
+        element: <ManageSlots />,
       },
       {
         path: "services/pastBookings",

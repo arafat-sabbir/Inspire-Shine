@@ -7,4 +7,6 @@ export type TUser = {
   address: string;
   iat: number;
   exp: number;
+  _id: string;
+  createdAt:Date;
 };

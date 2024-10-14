@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Input } from "@/components/ui/input";
 import useAxiosSecure from "@/hooks/AxiosSecure";
 import { selectCurrentUser, setUser } from "@/redux/features/auth/authSlice";
@@ -22,7 +23,7 @@ const Profile = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   // Initialize React Hook Form
-  const { register, handleSubmit, setValue, formState: { errors } } = useForm<ProfileFormValues>({
+  const { register, handleSubmit, formState: { errors } } = useForm<ProfileFormValues>({
     defaultValues: {
       name: user?.name || "",
       address: user?.address || "",
@@ -104,7 +105,7 @@ const Profile = () => {
           <label className="font-semibold text-gray-600">User Since</label>
           <Input
             type="text"
-            defaultValue={new Date(user?.createdAt).toLocaleDateString() || ""}
+            defaultValue={new Date(user?.createdAt as any).toLocaleDateString() || ""}
             disabled
             className="p-3 border border-gray-300 rounded-lg bg-gray-100 focus:outline-none"
           />

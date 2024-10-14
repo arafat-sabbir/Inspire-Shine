@@ -88,6 +88,7 @@ const ManageServices: React.FC = () => {
   if (isError) return <div>Error loading services</div>;
 
   const handleDelete = (service: TService) => {
+    console.log("akldfj");
     setConfirmDeleteService(service);
     setIsDeleteDialogOpen(true);
   };

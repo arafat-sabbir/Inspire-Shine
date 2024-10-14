@@ -82,7 +82,7 @@ const Dashboard = () => {
                 <NavLink
                   to={"/dashboard/services"}
                   onClick={() => setIsServicesOpen(!isServicesOpen)}
-                  className={`flex items-center py-2 px-4 text-title-dark bg-slate-700 hover:bg-gray-700 ${
+                  className={`flex items-center py-2 px-4 text-title-dark  ${
                     isOpen ? "justify-between" : "justify-center"
                   }`}
                 >
@@ -91,7 +91,7 @@ const Dashboard = () => {
                 <NavLink
                   to={"/dashboard/slots"}
                   onClick={() => setIsServicesOpen(!isServicesOpen)}
-                  className={`flex items-center py-2 px-4 text-title-dark bg-gray-700 hover:bg-gray-700 ${
+                  className={`flex items-center py-2 px-4  hover:bg-gray-700 text-title-dark hover:text-title ${
                     isOpen ? "justify-between" : "justify-center"
                   }`}
                 >
