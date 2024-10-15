@@ -8,6 +8,13 @@ export type TService = {
     isDeleted: boolean
     createdAt: string
     updatedAt: string
+    category:
+    | "basic wash"
+    | "interior detailing"
+    | "exterior shine"
+    | "engine cleaning"
+    | "headlight restoration"
+    | "full service";
   }
   
   export interface TSlot {

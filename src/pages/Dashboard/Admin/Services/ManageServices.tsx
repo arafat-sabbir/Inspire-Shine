@@ -21,6 +21,17 @@ import useServices from "@/hooks/useServices";
 import useAxiosSecure from "@/hooks/AxiosSecure";
 import { toast } from "sonner";
 import { Loader } from "lucide-react";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+const categoryOptions = [
+  "basic wash",
+  "interior detailing",
+  "exterior shine",
+  "engine cleaning",
+  "headlight restoration",
+  "full service",
+] as const;
+
+type TCategory = typeof categoryOptions[number];
 
 const ManageServices: React.FC = () => {
   const axios = useAxiosSecure();
@@ -31,7 +42,8 @@ const ManageServices: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
   const [editingService, setEditingService] = useState<TService | null>(null);
-  const [confirmDeleteService, setConfirmDeleteService] = useState<TService | null>(null);
+  const [confirmDeleteService, setConfirmDeleteService] =
+    useState<TService | null>(null);
 
   const columns = useMemo<ColumnDef<TService>[]>(
     () => [
@@ -46,6 +58,13 @@ const ManageServices: React.FC = () => {
       {
         accessorKey: "price",
         header: "Price ($)",
+      },
+      {
+        accessorKey: "category",
+        header: "Category",
+        cell({getValue}) {
+          return <h1 className="capitalize text-center">{getValue() as TCategory}</h1>
+        }
       },
       {
         accessorKey: "duration",
@@ -102,6 +121,7 @@ const ManageServices: React.FC = () => {
       description: formData.get("description") as string,
       price: Number(formData.get("price")),
       duration: Number(formData.get("duration")),
+      category: formData.get("category") as TCategory,
     };
     try {
       const response = await axios.post("/services", newService);
@@ -128,7 +148,10 @@ const ManageServices: React.FC = () => {
       duration: Number(formData.get("duration")),
     };
     try {
-      const response = await axios.put(`/services/${editingService._id}`, updatedService);
+      const response = await axios.put(
+        `/services/${editingService._id}`,
+        updatedService
+      );
       toast.success(response?.data?.message);
       setIsModalOpen(false);
       setEditingService(null);
@@ -144,7 +167,9 @@ const ManageServices: React.FC = () => {
     if (!confirmDeleteService) return;
     setDeleteLoading(true);
     try {
-      const response = await axios.delete(`/services/${confirmDeleteService._id}`);
+      const response = await axios.delete(
+        `/services/${confirmDeleteService._id}`
+      );
       toast.success(response?.data?.message);
       setIsDeleteDialogOpen(false);
       setConfirmDeleteService(null);
@@ -159,7 +184,9 @@ const ManageServices: React.FC = () => {
   return (
     <div>
       <div className="flex justify-between items-center mb-4">
-        <h2 className="text-lg sm:text-xl lg:text-2xl font-bold">Manage Services</h2>
+        <h2 className="text-lg sm:text-xl lg:text-2xl font-bold">
+          Manage Services
+        </h2>
         <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
           <DialogTrigger asChild>
             <Button
@@ -173,42 +200,95 @@ const ManageServices: React.FC = () => {
           </DialogTrigger>
           <DialogContent className="max-w-full sm:max-w-lg">
             <DialogHeader>
-              <DialogTitle>{editingService ? "Edit Service" : "Add Service"}</DialogTitle>
+              <DialogTitle>
+                {editingService ? "Edit Service" : "Add Service"}
+              </DialogTitle>
             </DialogHeader>
-            <form onSubmit={editingService ? handleEditSubmit : handleAddSubmit}>
+            <form
+              onSubmit={editingService ? handleEditSubmit : handleAddSubmit}
+            >
               <FormItem>
                 <label htmlFor="name" className="mb-2 font-medium">
                   Service Name
                 </label>
-                <Input id="name" name="name" defaultValue={editingService?.name || ""} required />
+                <Input
+                  id="name"
+                  name="name"
+                  defaultValue={editingService?.name || ""}
+                  required
+                />
               </FormItem>
               <FormItem>
                 <label htmlFor="description" className="mb-2 font-medium">
                   Description
                 </label>
-                <Input id="description" name="description" defaultValue={editingService?.description || ""} required />
+                <Input
+                  id="description"
+                  name="description"
+                  defaultValue={editingService?.description || ""}
+                  required
+                />
+              </FormItem>
+              <FormItem>
+                <label htmlFor="category" className="mb-2 font-medium">
+                  Category
+                </label>
+                <Select
+                  defaultValue={editingService?.category || ""}
+                  name="category"
+                  required
+                >
+                  <SelectTrigger id="category">
+                    <SelectValue placeholder="Select a category" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {categoryOptions.map((category:TCategory) => (
+                      <SelectItem key={category} value={category}>
+                        {category.charAt(0).toUpperCase() + category.slice(1)}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </FormItem>
               <FormItem>
                 <label htmlFor="price" className="mb-2 font-medium">
                   Price
                 </label>
-                <Input id="price" name="price" type="number" defaultValue={editingService?.price || ""} required />
+                <Input
+                  id="price"
+                  name="price"
+                  type="number"
+                  defaultValue={editingService?.price || ""}
+                  required
+                />
               </FormItem>
               <FormItem>
                 <label htmlFor="duration" className="mb-2 font-medium">
                   Duration (mins)
                 </label>
-                <Input id="duration" name="duration" type="number" defaultValue={editingService?.duration || ""} required />
+                <Input
+                  id="duration"
+                  name="duration"
+                  type="number"
+                  defaultValue={editingService?.duration || ""}
+                  required
+                />
               </FormItem>
               <DialogFooter>
                 <Button disabled={addLoading || editLoading} type="submit">
                   {editingService ? (
                     <>
-                      Update Service {editLoading && <Loader className="animate-spin ml-2 h-4 w-4" />}
+                      Update Service{" "}
+                      {editLoading && (
+                        <Loader className="animate-spin ml-2 h-4 w-4" />
+                      )}
                     </>
                   ) : (
                     <>
-                      Add Service {addLoading && <Loader className="animate-spin ml-2 h-4 w-4" />}
+                      Add Service{" "}
+                      {addLoading && (
+                        <Loader className="animate-spin ml-2 h-4 w-4" />
+                      )}
                     </>
                   )}
                 </Button>
@@ -223,8 +303,16 @@ const ManageServices: React.FC = () => {
             {table.getHeaderGroups().map((headerGroup) => (
               <tr key={headerGroup.id}>
                 {headerGroup.headers.map((header) => (
-                  <th key={header.id} className="border px-2 sm:px-4 py-2 text-xs sm:text-sm lg:text-base">
-                    {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
+                  <th
+                    key={header.id}
+                    className="border border-gray-300 px-2 sm:px-4 py-2 text-xs sm:text-sm lg:text-base"
+                  >
+                    {header.isPlaceholder
+                      ? null
+                      : flexRender(
+                          header.column.columnDef.header,
+                          header.getContext()
+                        )}
                   </th>
                 ))}
               </tr>
@@ -234,7 +322,10 @@ const ManageServices: React.FC = () => {
             {table.getRowModel().rows.map((row) => (
               <tr key={row.id}>
                 {row.getVisibleCells().map((cell) => (
-                  <td key={cell.id} className="border px-2 sm:px-4 py-2 text-xs sm:text-sm lg:text-base">
+                  <td
+                    key={cell.id}
+                    className="border border-gray-300 px-2 sm:px-4 py-2 text-xs sm:text-sm lg:text-base"
+                  >
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </td>
                 ))}
@@ -251,10 +342,19 @@ const ManageServices: React.FC = () => {
               <DialogTitle>Confirm Delete</DialogTitle>
             </DialogHeader>
             <DialogFooter>
-              <Button variant="destructive" onClick={confirmDelete} disabled={deleteLoading}>
-                Confirm {deleteLoading && <Loader className="animate-spin ml-2 h-4 w-4" />}
+              <Button
+                variant="destructive"
+                onClick={confirmDelete}
+                disabled={deleteLoading}
+              >
+                Confirm{" "}
+                {deleteLoading && (
+                  <Loader className="animate-spin ml-2 h-4 w-4" />
+                )}
               </Button>
-              <Button onClick={() => setIsDeleteDialogOpen(false)}>Cancel</Button>
+              <Button onClick={() => setIsDeleteDialogOpen(false)}>
+                Cancel
+              </Button>
             </DialogFooter>
           </DialogContent>
         </Dialog>

@@ -1,9 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "./AxiosPublic";
 
-
-
-
 type TQuery = {
   searchTerm?: string;
   page?: number;
@@ -23,17 +20,13 @@ const useServices = (query?: TQuery) => {
     query?.sort || "desc",
   ];
 
-
-  // ?page=${query?.page || 1}&categories=${
-  //   query?.categories?.join(",") || "all"
-  // }&searchTerm=${query?.searchTerm || ""}&sort=${query?.sort || "desc"}
-
-
   return useQuery({
     queryKey,
     queryFn: async () => {
       const res = await axiosPublic.get(
-        `/services`
+        `/services?page=${query?.page || 1}&categories=${
+          query?.categories?.join(",") || "all"
+        }&searchTerm=${query?.searchTerm || ""}&sort=${query?.sort || "desc"}`
       );
       return res.data.data;
     },

@@ -11,19 +11,25 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import Container from "@/layout/Container/Container";
-import {  Search } from "lucide-react";
+import { Search } from "lucide-react";
 import NotFound from "@/components/NotFound";
 import useServices from "@/hooks/useServices";
 import { TService } from "@/types/services";
 import ServiceCard from "@/components/ServiceCard";
-
 
 const Services = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [sort, setSort] = useState("asc");
   const [pageSize] = useState(10);
-  const categories = ["Basic Wash", "Interior Detailing", "Exterior Shine", "Engine Cleaning", "Headlight Restoration","Full Service"];
+  const categories = [
+    "basic wash",
+    "interior detailing",
+    "exterior shine",
+    "engine cleaning",
+    "headlight restoration",
+    "full service",
+  ];
   const [searchTerm, setSearchTerm] = useState("");
 
   // Ref to clear the input value
@@ -35,8 +41,7 @@ const Services = () => {
     categories: selectedCategories,
     sort,
   };
-
-  const { data, isLoading, isError } = useServices(query)
+  const { data, isLoading, isError } = useServices(query);
   const totalPages = Math.ceil(data?.totalProduct / pageSize);
 
   const handleSearch = (e: FormEvent<HTMLFormElement>) => {
@@ -70,7 +75,6 @@ const Services = () => {
     setSelectedCategories([]);
     setSearchTerm("");
     setSort("asc");
-
     // Clear the search input value
     if (searchInputRef.current) {
       searchInputRef.current.value = "";
@@ -82,7 +86,7 @@ const Services = () => {
       <div className="text-center text-red-500">Error loading products</div>
     );
   }
-console.log(data);
+
   return (
     <Container className="py-10 min-h-[65vh]">
       {/* Category Filters */}
@@ -124,7 +128,7 @@ console.log(data);
         {categories.map((name) => (
           <div
             key={name}
-            className={`py-1 px-4 rounded-full cursor-pointer transition duration-300 ${
+            className={`py-1 px-4 rounded-full capitalize cursor-pointer transition duration-300 ${
               selectedCategories.includes(name)
                 ? "bg-red-500 text-white"
                 : "bg-gray-300/60 text-gray-700 hover:bg-gray-300"
@@ -142,9 +146,7 @@ console.log(data);
           ))}
         </Container>
       )}
-      {!isLoading && !data?.length && (
-       <NotFound title="No Products Found"/>
-      )}
+      {!isLoading && !data?.length && <NotFound title="No Products Found" />}
       {/* Products Grid */}
       {data?.length > 0 && (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 justify-center items-center justify-items-center ">
