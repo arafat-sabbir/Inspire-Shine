@@ -46,6 +46,7 @@ const RateUs: React.FC = () => {
         rating,
       });
       toast.success("Reviewed Successfully");
+      window.location.reload();
       setRating(0); // Reset the rating
       reset(); // Reset the form
     } catch (error: any) {

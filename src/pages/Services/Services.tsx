@@ -1,5 +1,4 @@
 import { useRef, FormEvent, useState } from "react";
-import ProductCardSkeleton from "@/components/skeletonLoader/ProductCardSkeleton";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -16,6 +15,7 @@ import NotFound from "@/components/NotFound";
 import useServices from "@/hooks/useServices";
 import { TService } from "@/types/services";
 import ServiceCard from "@/components/ServiceCard";
+import ServiceCardSkeleton from "@/components/skeletonLoader/ProductCardSkeleton";
 
 const Services = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -42,7 +42,7 @@ const Services = () => {
     sort,
   };
   const { data, isLoading, isError } = useServices(query);
-  const totalPages = Math.ceil(data?.totalProduct / pageSize);
+  const totalPages = Math.ceil(data?.totalServices / pageSize);
 
   const handleSearch = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -140,17 +140,17 @@ const Services = () => {
         ))}
       </div>
       {isLoading && (
-        <Container className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 overflow-hidden 2xl:grid-cols-4 gap-10 py-10 justify-center items-center justify-items-center ">
+        <Container className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 overflow-hidden  gap-10 py-10 justify-center items-center justify-items-center ">
           {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
-            <ProductCardSkeleton key={i} />
+            <ServiceCardSkeleton key={i} />
           ))}
         </Container>
       )}
-      {!isLoading && !data?.length && <NotFound title="No Products Found" />}
+      {!isLoading && !data?.services?.length && <NotFound title="No Products Found" />}
       {/* Products Grid */}
-      {data?.length > 0 && (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 justify-center items-center justify-items-center ">
-          {data?.map((product: TService) => (
+      {data?.services?.length > 0 && (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3   gap-8 justify-center items-center justify-items-center ">
+          {data?.services?.map((product: TService) => (
             <ServiceCard key={product._id} item={product} />
           ))}
         </div>

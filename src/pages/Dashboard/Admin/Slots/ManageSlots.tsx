@@ -46,14 +46,16 @@ const ManageSlots: React.FC = () => {
 
   useEffect(() => {
     const getServices = async () => {
-      const res = await axiosPublic.get(`/services`);
-      setServices(res?.data?.data);
+      const res = await axiosPublic.get(`/services?page=${1}&categories=${"all"
+        }&searchTerm=${""}&sort=${"desc"}`);
+      console.log(res?.data);
+      setServices(res?.data?.data.services);
     };
     getServices();
   }, [axiosPublic]);
 
   const { data: slots, isLoading, isError, refetch } = useSlots();
-  console.log(slots);
+
   
   // Define the columns for the slots table
   const columns = useMemo<ColumnDef<TSlot>[]>(
@@ -283,7 +285,7 @@ const ManageSlots: React.FC = () => {
             {table.getHeaderGroups().map(headerGroup => (
               <tr key={headerGroup.id}>
                 {headerGroup.headers.map(header => (
-                  <th key={header.id} className="border px-4 py-2 text-center">
+                  <th key={header.id} className="border border-gray-300 px-4 py-2 text-center">
                     {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
                   </th>
                 ))}
@@ -294,7 +296,7 @@ const ManageSlots: React.FC = () => {
             {table.getRowModel().rows.map(row => (
               <tr key={row.id} className="border-b hover:bg-gray-100">
                 {row.getVisibleCells().map(cell => (
-                  <td key={cell.id} className="border px-4 py-2 text-center">
+                  <td key={cell.id} className="border border-gray-300 px-4 py-2 text-center">
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </td>
                 ))}

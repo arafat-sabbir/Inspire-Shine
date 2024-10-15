@@ -13,6 +13,7 @@ import ServiceDetail from "@/pages/ServiceDetail/ServiceDetail";
 import Services from "@/pages/Services/Services";
 import { createBrowserRouter } from "react-router-dom";
 import ManageSlots from "@/pages/Dashboard/Admin/Slots/ManageSlots";
+import ManageUsers from "@/pages/Dashboard/Admin/Users/ManageUsers";
 
 export const routes = createBrowserRouter([
   {
@@ -62,6 +63,10 @@ export const routes = createBrowserRouter([
       {
         path: "services/pastBookings",
         element: <PastBooking />,
+      },
+      {
+        path: "users",
+        element: <ManageUsers />,
       },
       {
         path: "services/upComingBookings",

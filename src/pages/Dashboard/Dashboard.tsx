@@ -97,6 +97,15 @@ const Dashboard = () => {
                 >
                   Manage Slots
                 </NavLink>
+                <NavLink
+                  to={"/dashboard/users"}
+                  onClick={() => setIsServicesOpen(!isServicesOpen)}
+                  className={`flex items-center py-2 px-4  hover:bg-gray-700 text-title-dark hover:text-title ${
+                    isOpen ? "justify-between" : "justify-center"
+                  }`}
+                >
+                  Manage Users
+                </NavLink>
               </ul>
             </div>
           )}

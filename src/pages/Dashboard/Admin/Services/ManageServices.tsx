@@ -98,7 +98,7 @@ const ManageServices: React.FC = () => {
   );
 
   const table = useReactTable({
-    data: services,
+    data: services?.services||[],
     columns,
     getCoreRowModel: getCoreRowModel(),
   });
