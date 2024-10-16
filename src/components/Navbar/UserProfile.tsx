@@ -8,7 +8,7 @@ import { TUser } from "@/types/user/user";
 import { logOut } from "@/redux/features/auth/authSlice";
 import { useAppDispatch } from "@/redux/features/hooks";
 import { Link } from "react-router-dom";
-import { ShoppingCart, SquareChartGantt } from "lucide-react";
+import { SquareChartGantt } from "lucide-react";
 
 const UserProfile = ({ user }: { user: TUser; cart?: number }) => {
   const dispatch = useAppDispatch();
@@ -41,7 +41,7 @@ const UserProfile = ({ user }: { user: TUser; cart?: number }) => {
         <Button className="w-full bg-primary hover:text-black text-white rounded-md py-2">
           <Link
             className="flex gap-2 items-center"
-            to={"/dashboard/services"}
+            to={`${user?.role === "admin" ? "/dashboard/services" : "/dashboard/profile"}`}
           >
             <SquareChartGantt className="w-4 h-4" />
             Dashboard

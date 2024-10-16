@@ -14,6 +14,7 @@ import Services from "@/pages/Services/Services";
 import { createBrowserRouter } from "react-router-dom";
 import ManageSlots from "@/pages/Dashboard/Admin/Slots/ManageSlots";
 import ManageUsers from "@/pages/Dashboard/Admin/Users/ManageUsers";
+import BookingPage from "@/pages/Booking/BookingPage";
 
 export const routes = createBrowserRouter([
   {
@@ -36,6 +37,10 @@ export const routes = createBrowserRouter([
       {
         path: "/book",
         element: <Booking />,
+      },
+      {
+        path: "/booking",
+        element: <BookingPage />,
       },
       // Additional nested routes can be added here
     ],

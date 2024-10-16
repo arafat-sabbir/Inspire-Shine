@@ -9,6 +9,7 @@ import { Provider } from "react-redux";
 import { persistor, store } from "./redux/features/store.ts";
 import { PersistGate } from "redux-persist/integration/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import ScrollToTop from "./components/ScrollToTop.tsx";
 
 const queryClient = new QueryClient();
 
@@ -23,6 +24,7 @@ createRoot(document.getElementById("root")!).render(
         </PersistGate>
       </Provider>
     </QueryClientProvider>
+    <ScrollToTop />
     <Toaster richColors position="top-center" />
   </StrictMode>
 );

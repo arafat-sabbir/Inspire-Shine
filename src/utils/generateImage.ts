@@ -3,7 +3,7 @@
 // Function to generate full image URL
 const generateImage = (filePath: string): string => {
   // Access the backend URL from environment variables
-  const backendUrl = "http://localhost:5000/api";
+  const backendUrl = "https://inspire-shine-server.vercel.app/api";
 
   // Construct the full URL
   const imageUrl = `${backendUrl}/${filePath}`;

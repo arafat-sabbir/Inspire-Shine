@@ -155,9 +155,9 @@ const Dashboard = () => {
       )}
 
       {/* Navbar */}
-      <div className="flex flex-col flex-1 border-b-2 border-b-gray-200">
-        <div className="flex justify-between items-center p-4 bg-gray-200">
-          <h1 className="text-xl font-bold">Manage Services</h1>
+      <div className="flex flex-col flex-1  bg-white dark:bg-gray-700 dark:text-white">
+        <div className="flex justify-between items-center p-4 border-b border-b-gray-300">
+          <h1 className="text-xl font-bold capitalize">{user!.role} Dashboard</h1>
           <Button
             className="rounded-full hover:border-gray-500 border-gray-500"
             variant="outline"

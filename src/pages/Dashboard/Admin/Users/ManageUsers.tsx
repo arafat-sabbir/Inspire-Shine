@@ -16,11 +16,9 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { FormItem } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
 import useAxiosSecure from "@/hooks/AxiosSecure";
 import { toast } from "sonner";
 import { Loader } from "lucide-react";
-import useSlots from "@/hooks/useSlots";
 import { Edit } from "lucide-react"; // Import the edit icon from Lucide
 import { TUser } from "@/types/user/user";
 
