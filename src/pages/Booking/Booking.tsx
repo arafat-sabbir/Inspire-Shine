@@ -20,6 +20,8 @@ import useAxiosSecure from "@/hooks/AxiosSecure";
 import { toast } from "sonner";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css"; // Import date picker styles
+import { useState } from "react";
+import { Loader } from "lucide-react";
 
 const vehicleTypes = [
   "car",
@@ -64,7 +66,9 @@ const Booking = () => {
     },
   });
   const axios = useAxiosSecure();
+  const [loading, setLoading] = useState(false);
   const onSubmit = async (values: BookingFormValues) => {
+    setLoading(true);
     const bookingData = {
       ...values,
       email: user?.email,
@@ -85,6 +89,8 @@ const Booking = () => {
     } catch (error: any) {
       toast.error(error?.response?.data?.message);
       console.log(error?.response?.data);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -292,8 +298,8 @@ const Booking = () => {
               />
             </div>
 
-            <Button type="submit" className="w-full bg-primary text-white">
-              Confirm Booking
+            <Button disabled={loading} type="submit" className="w-full bg-primary text-white">
+              Confirm Booking {loading&&<Loader className="animate-spin ml-2"/>}
             </Button>
           </form>
         </Form>
