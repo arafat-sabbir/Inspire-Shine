@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ReactNode, useMemo } from "react";
 import useBookings from "@/hooks/useBookingData";
 import { TBooking } from "@/types/booking/booking";
@@ -26,8 +27,6 @@ const PastBooking = () => {
   }, [data, today]);
 
   // Define the table columns
-
-  
   const columns = useMemo<ColumnDef<TBooking>[]>(
     () => [
       {
@@ -83,13 +82,14 @@ const PastBooking = () => {
         accessorKey: "isPaid",
         header: () => <div className="text-center">Payment Status</div>,
         cell: ({ row }) => (
-          <div className="text-center">{row.original.isPaid ? "Paid" : "Not Paid"}</div>
+          <div className="text-center">
+            {row.original.isPaid ? "Paid" : "Not Paid"}
+          </div>
         ),
       },
     ],
     []
   );
-  
 
   const table = useReactTable({
     data: pastBookings || [],
@@ -104,22 +104,29 @@ const PastBooking = () => {
       </div>
     );
   }
-  
+
   if (isError) {
     return <div>Something Went Wrong</div>;
   }
-  
+
   return (
     <div>
-      <p className="text-center font-semibold tracking-wide text-2xl py-2">Total Past Bookings: {pastBookings.length}</p>
+      <p className="text-center font-semibold tracking-wide text-2xl py-2">
+        Total Past Bookings: {pastBookings.length}
+      </p>
       {pastBookings.length > 0 ? (
         <table className="min-w-full bg-white border dark:bg-gray-700 dark:text-white">
           <thead>
             {table.getHeaderGroups().map((headerGroup) => (
               <tr key={headerGroup.id}>
                 {headerGroup.headers.map((header) => (
-                  <th key={header.id} className="py-2 px-4 bg-gray-100 dark:bg-gray-700 dark:text-white border">
-                    {header.isPlaceholder ? null : (header as any).renderHeader()}
+                  <th
+                    key={header.id}
+                    className="py-2 px-4 bg-gray-100 dark:bg-gray-700 dark:text-white border"
+                  >
+                    {header.isPlaceholder
+                      ? null
+                      : (header.column.columnDef.header as any)?.()}
                   </th>
                 ))}
               </tr>
@@ -129,8 +136,11 @@ const PastBooking = () => {
             {table.getRowModel().rows.map((row) => (
               <tr key={row.id} className="border-b">
                 {row.getVisibleCells().map((cell) => (
-                  <td key={cell.id} className="py-2 px-4 border dark:text-white">
-                   {cell.getValue() as ReactNode} 
+                  <td
+                    key={cell.id}
+                    className="py-2 px-4 border dark:text-white"
+                  >
+                    {cell.getValue() as ReactNode}
                   </td>
                 ))}
               </tr>

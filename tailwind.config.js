@@ -1,5 +1,7 @@
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+import tailwindcssAnimate from 'tailwindcss-animate';
+
+export default {
   darkMode: ["class"],
   content: [
     "./pages/**/*.{ts,tsx}",
@@ -17,9 +19,9 @@ module.exports = {
       },
     },
     extend: {
-      fontFamily:{
-        "bai":"var(--font-bai)",
-        "zen":"var(--font-zen)"
+      fontFamily: {
+        "bai": "var(--font-bai)",
+        "zen": "var(--font-zen)",
       },
       colors: {
         border: "hsl(var(--border))",
@@ -81,5 +83,5 @@ module.exports = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [tailwindcssAnimate],
 };
